@@ -9,6 +9,9 @@
             @init="filePondInit"
             accepted-file-types="image/jpeg, image/png , image/jpg , image/gif"
             @processfile="handleProcessFile"
+            max-file-size="3MB"
+            allow-multiple="true"
+            max-files="1000"
             />
         
         </div>
@@ -29,21 +32,28 @@ import VueFilePond, { setOptions } from 'vue-filepond';
 import 'filepond/dist/filepond.min.css';
 
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
+import FilePondPluginFileValidateSize  from 'filepond-plugin-file-validate-size';
 import axios from 'axios';
 
+let serverMessages ={};
 setOptions({
     server: {
         process: {
             url: './upload',
-           
+            onerror: (response) => {
+                serverMessages = JSON.parse(response);
+            },
             headers: {
                 'X-CSRF-TOKEN': document.head.querySelector('meta[name="csrf-token"]').content
             },
 
         }
     },
+    labelFileProcessingError: (error, file) => {
+        return serverMessages.error || 'Error processing file';
+    }
 });
-const FilePond = VueFilePond(FilePondPluginFileValidateType);
+const FilePond = VueFilePond(FilePondPluginFileValidateType, FilePondPluginFileValidateSize);
 
 export default {
     components: {

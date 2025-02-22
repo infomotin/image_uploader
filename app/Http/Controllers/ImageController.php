@@ -7,6 +7,7 @@ use App\Models\Image;
 
 class ImageController extends Controller
 {
+    
     //index 
     public function index()
     {
@@ -20,6 +21,7 @@ class ImageController extends Controller
     //store
     public function store(Request $request)
     {
+        // return response()->json(['error' => 'File Size Limit Exceeded'], 500);
         // dd($request->all());
         //validate the image file
         if(!$request->hasFile('image')){

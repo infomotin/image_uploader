@@ -21,6 +21,7 @@
     },
     "dependencies": {
         "filepond": "^4.32.7",
+        "filepond-plugin-file-validate-size": "^2.2.8",
         "vue-filepond": "^7.0.4"
     }
 }
