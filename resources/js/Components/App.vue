@@ -33,6 +33,9 @@ import 'filepond/dist/filepond.min.css';
 
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
 import FilePondPluginFileValidateSize  from 'filepond-plugin-file-validate-size';
+import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
+import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
+
 import axios from 'axios';
 
 let serverMessages ={};
@@ -53,7 +56,7 @@ setOptions({
         return serverMessages.error || 'Error processing file';
     }
 });
-const FilePond = VueFilePond(FilePondPluginFileValidateType, FilePondPluginFileValidateSize);
+const FilePond = VueFilePond(FilePondPluginFileValidateType, FilePondPluginFileValidateSize,FilePondPluginImagePreview);
 
 export default {
     components: {
